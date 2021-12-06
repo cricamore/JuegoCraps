@@ -42,7 +42,7 @@ public class ModelCraps {
      * estado = 3 Establish Punto
      */
     public void determinarJuego(){
-        if(flag==1){
+        if(flag==0){
             if(tiro==7 || tiro==11){
                 estado = 1;
             }else{
