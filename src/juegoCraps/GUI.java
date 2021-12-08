@@ -29,6 +29,7 @@ public class GUI extends JFrame {
     private JSeparator separator;
     private Escucha escucha;
     private ModelCraps modelCraps;
+    private boolean flag = false;
 
     /**
      * Constructor of GUI class
@@ -111,6 +112,7 @@ public class GUI extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
             modelCraps.calcularTiro();
             int[] caras = modelCraps.getCaras();
             imageDado = new ImageIcon(getClass().getResource("/resources/"+caras[0]+".png"));
@@ -119,17 +121,21 @@ public class GUI extends JFrame {
             dado2.setIcon(imageDado);
             modelCraps.determinarJuego();
 
-            panelResultados.removeAll();
-            panelResultados.setBorder(BorderFactory.createTitledBorder("Resultados "));
-            panelResultados.add(resultadosDados);
-            panelResultados.add(separator);
-            panelResultados.add(mensajesSalida);
+            if (!flag) {
+                panelResultados.removeAll();
+                panelResultados.setBorder(BorderFactory.createTitledBorder("Resultados "));
+                panelResultados.add(resultadosDados);
+                panelResultados.add(separator);
+                panelResultados.add(mensajesSalida);
+                mensajesSalida.setRows(4);
+            }else {
+                flag=true;
+            }
             resultadosDados.setText(modelCraps.getEstadoToString()[0]);
-            mensajesSalida.setRows(4);
             mensajesSalida.setText(modelCraps.getEstadoToString()[1]);
+
             revalidate();
             repaint();
         }
-
     }
 }
